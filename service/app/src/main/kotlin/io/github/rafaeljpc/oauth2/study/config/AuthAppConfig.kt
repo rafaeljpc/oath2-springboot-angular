@@ -2,6 +2,7 @@ package io.github.rafaeljpc.oauth2.study.config
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
@@ -11,7 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @Configuration
 @EnableWebSecurity
-class AuthAppConfig {
+class AuthAppConfig(
+    @Value("\${auth0.audience}")
+    private val audience: String,
+    @Value("\${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+    private val issuer: String,
+) {
 
     companion object {
 
@@ -37,7 +43,9 @@ class AuthAppConfig {
         .authorizeHttpRequests { authorize ->
             authorize
                 .requestMatchers(*SWAGGER_PATHS).anonymous()
-                .anyRequest().authenticated()
+                .anyRequest().hasAuthority("SCOPE_read:user")
+                .and().cors()
+                .and().oauth2ResourceServer().jwt()
         }
         .build()
 

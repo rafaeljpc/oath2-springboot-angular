@@ -1,8 +1,12 @@
+auth0:
+  audience: https://rafaeljpc-auth0-study/api
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-fy4o4rqpbj7k2j2w.us.auth0.com/
+          audiences:
+            - ${auth0.audience}
   jpa:
     show-sql: true
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          jwk-set-uri: https://example.com/.well-known/jwks.json
