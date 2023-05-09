@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    kotlin("jvm") version  "1.8.10"
+    kotlin("jvm") version "1.8.10"
     kotlin("plugin.spring") version "1.8.10"
     kotlin("plugin.jpa") version "1.8.10"
     kotlin("plugin.allopen") version "1.8.10"
@@ -68,14 +68,20 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:3.+")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
     implementation("com.h2database:h2:1.4.+")
 
+    testImplementation("org.junit.jupiter:junit-jupiter:5.+")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("com.ninja-squad:springmockk:4.+")
     testImplementation("io.mockk:mockk:1.+")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.+")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
