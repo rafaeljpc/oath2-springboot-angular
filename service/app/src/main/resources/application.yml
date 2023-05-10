@@ -1,11 +1,11 @@
 auth0:
-  audience: https://rafaeljpc-auth0-study/api
+  audience: ${AUDIENCE:https://some-api/api}
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://dev-fy4o4rqpbj7k2j2w.us.auth0.com/
+          issuer-uri: ${JWT_ISSUER:https://your-domain.auth0.com/}
           audiences:
             - ${auth0.audience}
   jpa:

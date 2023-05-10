@@ -1,0 +1,8 @@
+auth.app:
+  test:
+    client:
+      tokenUrl: ${GET_TOKEN_URL}
+      grantType: ${GRANT_TYPE}
+      clientId: ${CLIENT_ID}
+      clientSecret: ${CLIENT_SECRET}
+      audience: ${AUDIENCE}

@@ -4,6 +4,7 @@
 package io.github.rafaeljpc.oauth2.study
 
 import io.github.rafaeljpc.oauth2.study.config.AuthAppConfig
+import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
@@ -24,3 +25,12 @@ class AuthAppTest {
 @AutoConfigureWebTestClient
 @Import(AuthAppConfig::class)
 class AuthAppTestConfig
+
+@ConfigurationProperties(prefix = "auth.app.test.client")
+data class ClientConfig(
+    val grantType: String = "",
+    val clientId: String = "",
+    val clientSecret: String = "",
+    val audience: String = "",
+    val tokenUrl: String = "",
+)
