@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment.development';
 import { Auth0LoginComponent } from './auth0-login/auth0-login.component';
 import { Auth0LogoutComponent } from './auth0-logout/auth0-logout.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { StudyUserComponent } from './study-user/study-user.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     StudyContentComponent,
     Auth0LoginComponent,
     Auth0LogoutComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    StudyUserComponent
   ],
   imports: [
     BrowserModule,

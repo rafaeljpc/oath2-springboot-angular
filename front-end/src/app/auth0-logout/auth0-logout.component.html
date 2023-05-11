@@ -1,1 +1,1 @@
-<button (click)="logout()">Log out</button>
+<button (click)="logout()" *ngIf="this.auth.isAuthenticated$|async">Log out</button>

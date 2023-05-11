@@ -11,7 +11,7 @@ export class Auth0LogoutComponent {
 
   constructor(
     @Inject(DOCUMENT) public document: Document,
-    private auth: AuthService
+    public auth: AuthService
   ) { }
 
   logout() {
