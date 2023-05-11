@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthModule, AuthHttpInterceptor } from '@auth0/auth0-angular';
 
 import { AppComponent } from './app.component';
 import { StudyToolbarComponent } from './study-toolbar/study-toolbar.component';
@@ -24,15 +25,32 @@ import { StudyUserComponent } from './study-user/study-user.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AuthModule.forRoot({
       domain: environment.authDomain,
       clientId: environment.authClientId,
+
       authorizationParams: {
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin,
+        audience: environment.audience,
+      },
+
+      httpInterceptor: {
+        allowedList: [{
+          uri: `${environment.serviceMainUrl}/*`,
+          tokenOptions: {
+            authorizationParams: {
+              audience: environment.audience,
+              scope: environment.scope
+            }
+          }
+        }]
       }
     })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController("user-controller")
 @RequestMapping(path = ["/user"])
-@CrossOrigin(origins = ["*"])
+@CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
 class UserController(
     private val userRepository: UserRepository
 ) {

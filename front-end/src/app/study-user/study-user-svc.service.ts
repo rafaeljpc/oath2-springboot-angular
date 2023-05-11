@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
+import { concatMap, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -9,7 +11,7 @@ export class StudyUserSvcService {
 
   private serviceUrl = `${environment.serviceMainUrl}/user`
 
-  constructor(private http: HttpClient) { }
+  constructor(public auth: AuthService, private http: HttpClient) { }
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -18,6 +20,15 @@ export class StudyUserSvcService {
   };
 
   hello() {
-    return this.http.get<Map<String, String>>(this.serviceUrl, this.httpOptions)
+
+    return this.auth.user$.pipe(
+      concatMap(
+        (user) => this.http.get<Message>(encodeURI(`${this.serviceUrl}/hello`), this.httpOptions)
+      )
+    )
   }
+}
+
+export class Message {
+  public message = ""
 }
